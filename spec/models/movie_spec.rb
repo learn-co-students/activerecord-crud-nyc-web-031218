@@ -70,6 +70,7 @@ describe 'Movie' do
       end
 
       it 'can be created in a block when no args are passed' do
+        #binding.pry
         movie = can_be_created_in_a_block
 
         expect(movie.title).to eq("Home Alone")
