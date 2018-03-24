@@ -1,11 +1,21 @@
 describe 'Movie' do
   let(:attributes) {{
+      id: 1,
       title: "The Sting",
       release_date: 1973,
       director: "George Roy Hill",
       lead: "Paul Newman",
       in_theaters: false
   }}
+
+  # let(:attributes1) {{
+  #     id: nil,
+  #     title: "The Sting",
+  #     release_date: 1973,
+  #     director: "George Roy Hill",
+  #     lead: "Paul Newman",
+  #     in_theaters: false
+  # }}
 
   it 'inherits from ActiveRecord::Base' do
     expect(Movie.superclass).to eq(ActiveRecord::Base)
@@ -53,7 +63,9 @@ describe 'Movie' do
     it 'can be saved to the database' do
       movie = Movie.new(attributes)
       movie.save
+      # binding.pry
       expect(Movie.find_by(attributes)).to eq(movie)
+
     end
   end
 
@@ -66,10 +78,12 @@ describe 'Movie' do
 
       it 'can be created with a hash of attributes' do
         movie = can_be_created_with_a_hash_of_attributes
+        # binding.pry
         expect(Movie.find_by(attributes)).to eq(movie)
       end
 
       it 'can be created in a block when no args are passed' do
+        # binding.pry
         movie = can_be_created_in_a_block
 
         expect(movie.title).to eq("Home Alone")
@@ -78,8 +92,11 @@ describe 'Movie' do
 
       it 'can be created in a block' do
         movie = can_be_created_in_a_block
+        # binding.pry
         args = { title: "The Room", release_date: 2003 }
         movie = can_be_created_in_a_block(args)
+        # binding.pry
+
 
         expect(movie.title).to eq("The Room")
         expect(movie.release_date).to eq(2003)
@@ -96,6 +113,7 @@ describe 'Movie' do
 
       it 'can get the first item in the database' do
         movie = can_get_the_first_item_in_the_database
+        # binding.pry
         expect(movie).to eq("Movie_0")
       end
 
@@ -128,7 +146,9 @@ describe 'Movie' do
         movie = Movie.create(title: "Awesome Flick")
         expect {
           can_be_found_updated_and_saved
+          # binding.pry
           movie.reload
+
         }.to change{ movie.title }.from("Awesome Flick").to("Even Awesomer Flick")
       end
 
